@@ -1,5 +1,5 @@
-# @integration
-@ignore
+@integration
+# @ignore
 Feature: API Integration Tests
 
     Tests for all possible interactions between API Resources
@@ -8,7 +8,7 @@ Feature: API Integration Tests
         * url 'https://jsonplaceholder.typicode.com'
 
     Scenario: Get All Todos for Specific User
-        * def pathUrl "users"
+        * def pathUrl = "users"
         * call read("classpath:scenarios/data/generate_id.feature")
 
         Given path pathUrl, newId, "todos"
@@ -19,7 +19,7 @@ Feature: API Integration Tests
         And match each response == { userId: "#number", id: "#number", title: "#string", completed: "#boolean" }
 
     Scenario: Get All Posts for Specific User
-        * def pathUrl "users"
+        * def pathUrl = "users"
         * call read("classpath:scenarios/data/generate_id.feature")
 
         Given path pathUrl, newId, "posts"
@@ -30,7 +30,7 @@ Feature: API Integration Tests
         And match each response == { userId: "#number", id: "#number", title: "#string", body: "#string" }
 
     Scenario: Get All Albums for Specific User
-        * def pathUrl "users"
+        * def pathUrl = "users"
         * call read("classpath:scenarios/data/generate_id.feature")
 
         Given path pathUrl, newId, "albums"
@@ -41,7 +41,7 @@ Feature: API Integration Tests
         And match each response == { userId: "#number", id: "#number", title: "#string" }
 
     Scenario: Get All Comments for Specific Posts
-        * def pathUrl "posts"
+        * def pathUrl = "posts"
         * call read("classpath:scenarios/data/generate_id.feature")
 
         Given path pathUrl, newId, "comments"
@@ -52,7 +52,7 @@ Feature: API Integration Tests
         And match each response == { postId: "#number", id: "#number", name: "#string", email: "#string", body: "#string" }
 
     Scenario: Get All Photos for Specific Albums
-        * def pathUrl "albums"
+        * def pathUrl = "albums"
         * call read("classpath:scenarios/data/generate_id.feature")
 
         Given path pathUrl, newId, "photos"
@@ -63,7 +63,7 @@ Feature: API Integration Tests
         And match each response == { albumId: "#number", id: "#number", title: "#string", url: "#string", thumbnailUrl: "#string" }
 
     Scenario: Filter Todos for Specific User
-        * def pathUrl "todos"
+        * def pathUrl = "todos"
         * call read("classpath:scenarios/data/generate_id.feature")
 
         Given path pathUrl
@@ -75,7 +75,7 @@ Feature: API Integration Tests
         And match each response == { userId: "#number", id: "#number", title: "#string", completed: "#boolean" }
 
     Scenario: Filter Posts for Specific User
-        * def pathUrl "posts"
+        * def pathUrl = "posts"
         * call read("classpath:scenarios/data/generate_id.feature")
 
         Given path pathUrl
@@ -87,7 +87,7 @@ Feature: API Integration Tests
         And match each response == { userId: "#number", id: "#number", title: "#string", body: "#string" }
 
     Scenario: Filter Albums for Specific User
-        * def pathUrl "albums"
+        * def pathUrl = "albums"
         * call read("classpath:scenarios/data/generate_id.feature")
 
         Given path pathUrl
@@ -99,7 +99,7 @@ Feature: API Integration Tests
         And match each response == { userId: "#number", id: "#number", title: "#string" }
 
     Scenario: Filter Comments for Specific Posts
-        * def pathUrl "comments"
+        * def pathUrl = "comments"
         * call read("classpath:scenarios/data/generate_id.feature")
 
         Given path pathUrl
@@ -111,7 +111,7 @@ Feature: API Integration Tests
         And match each response == { postId: "#number", id: "#number", name: "#string", email: "#string", body: "#string" }
 
     Scenario: Filter Photos for Specific Albums
-        * def pathUrl "photos"
+        * def pathUrl = "photos"
         * call read("classpath:scenarios/data/generate_id.feature")
 
         Given path pathUrl
