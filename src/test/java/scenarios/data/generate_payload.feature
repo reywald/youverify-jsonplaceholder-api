@@ -4,7 +4,7 @@ Feature: Generate Resource Body
     Generate request body for a resource
 
     Background:
-        * url 'https://jsonplaceholder.typicode.com'
+        * url baseUrl
 
     Scenario:
         # Get resource objects from its json file, randomly return one

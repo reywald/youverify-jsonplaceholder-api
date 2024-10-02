@@ -5,7 +5,7 @@ Feature: API Integration Tests
     Tests for all possible interactions between API Resources
 
     Background:
-        * url 'https://jsonplaceholder.typicode.com'
+        * url baseUrl
 
     Scenario: Get All Todos for Specific User
         * def pathUrl = "users"
@@ -16,7 +16,7 @@ Feature: API Integration Tests
         Then status 200
         And match responseType == "json"
         And match response == `#[] #object? _.userId == ${newId}`
-        And match each response == { userId: "#number", id: "#number", title: "#string", completed: "#boolean" }
+        And match each response == schemas.todoSchema
 
     Scenario: Get All Posts for Specific User
         * def pathUrl = "users"
@@ -27,7 +27,7 @@ Feature: API Integration Tests
         Then status 200
         And match responseType == "json"
         And match response == `#[] #object? _.userId == ${newId}`
-        And match each response == { userId: "#number", id: "#number", title: "#string", body: "#string" }
+        And match each response == schemas.postSchema
 
     Scenario: Get All Albums for Specific User
         * def pathUrl = "users"
@@ -38,7 +38,7 @@ Feature: API Integration Tests
         Then status 200
         And match responseType == "json"
         And match response == `#[] #object? _.userId == ${newId}`
-        And match each response == { userId: "#number", id: "#number", title: "#string" }
+        And match each response == schemas.albumSchema
 
     Scenario: Get All Comments for Specific Posts
         * def pathUrl = "posts"
@@ -49,7 +49,7 @@ Feature: API Integration Tests
         Then status 200
         And match responseType == "json"
         And match response == `#[] #object? _.postId == ${newId}`
-        And match each response == { postId: "#number", id: "#number", name: "#string", email: "#string", body: "#string" }
+        And match each response == schemas.commentSchema
 
     Scenario: Get All Photos for Specific Albums
         * def pathUrl = "albums"
@@ -60,7 +60,7 @@ Feature: API Integration Tests
         Then status 200
         And match responseType == "json"
         And match response == `#[] #object? _.albumId == ${newId}`
-        And match each response == { albumId: "#number", id: "#number", title: "#string", url: "#string", thumbnailUrl: "#string" }
+        And match each response == schemas.photoSchema
 
     Scenario: Filter Todos for Specific User
         * def pathUrl = "todos"
@@ -71,8 +71,8 @@ Feature: API Integration Tests
         When method Get
         Then status 200
         And match responseType == "json"
-        And match response == `#[] #object? _.userId == ${newId}`
-        And match each response == { userId: "#number", id: "#number", title: "#string", completed: "#boolean" }
+        And match response == `##[] #object? _.userId == ${newId}`
+        And match each response == schemas.todoSchema
 
     Scenario: Filter Posts for Specific User
         * def pathUrl = "posts"
@@ -83,8 +83,8 @@ Feature: API Integration Tests
         When method Get
         Then status 200
         And match responseType == "json"
-        And match response == `#[] #object? _.userId == ${newId}`
-        And match each response == { userId: "#number", id: "#number", title: "#string", body: "#string" }
+        And match response == `##[] #object? _.userId == ${newId}`
+        And match each response == schemas.postSchema
 
     Scenario: Filter Albums for Specific User
         * def pathUrl = "albums"
@@ -95,8 +95,8 @@ Feature: API Integration Tests
         When method Get
         Then status 200
         And match responseType == "json"
-        And match response == `#[] #object? _.userId == ${newId}`
-        And match each response == { userId: "#number", id: "#number", title: "#string" }
+        And match response == `##[] #object? _.userId == ${newId}`
+        And match each response == schemas.albumSchema
 
     Scenario: Filter Comments for Specific Posts
         * def pathUrl = "comments"
@@ -107,8 +107,8 @@ Feature: API Integration Tests
         When method Get
         Then status 200
         And match responseType == "json"
-        And match response == `#[] #object? _.postId == ${newId}`
-        And match each response == { postId: "#number", id: "#number", name: "#string", email: "#string", body: "#string" }
+        And match response == `##[] #object? _.postId == ${newId}`
+        And match each response == schemas.commentSchema
 
     Scenario: Filter Photos for Specific Albums
         * def pathUrl = "photos"
@@ -119,5 +119,5 @@ Feature: API Integration Tests
         When method Get
         Then status 200
         And match responseType == "json"
-        And match response == `#[] #object? _.albumId == ${newId}`
-        And match each response == { albumId: "#number", id: "#number", title: "#string", url: "#string", thumbnailUrl: "#string" }
+        And match response == `##[] #object? _.albumId == ${newId}`
+        And match each response == schemas.photoSchema

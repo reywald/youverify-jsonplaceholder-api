@@ -4,7 +4,7 @@ Feature: Functional Tests for Endpoints
     Functional tests for API Resources
 
     Background:
-        * url 'https://jsonplaceholder.typicode.com'
+        * url baseUrl
 
     # @ignore
     Scenario: Create a Post
@@ -19,7 +19,7 @@ Feature: Functional Tests for Endpoints
         Then status 201
         And match responseType == "json"
         And match response == "#object"
-        And match response == { userId: "#number", id: "#number", title: "#string", body: "#string" }
+        And match response == schemas.postSchema
         And match response contains payload
         * print `Created post with id: ${response.id}`
 
@@ -38,7 +38,7 @@ Feature: Functional Tests for Endpoints
         Then status 200
         And match responseType == "json"
         And match response == "#object"
-        And match response == { userId: "#number", id: "#number", title: "#string", body: "#string" }
+        And match response == schemas.postSchema
         And match response contains payload
         * print `Updated post with id: ${response.id}`
 
@@ -68,7 +68,7 @@ Feature: Functional Tests for Endpoints
         Then status 201
         And match responseType == "json"
         And match response == "#object"
-        And match response == { userId: "#number", id: "#number", title: "#string", completed: "#boolean" }
+        And match response == schemas.todoSchema
         And match response contains payload
         * print `Created todo with id: ${response.id}`
 
@@ -87,7 +87,7 @@ Feature: Functional Tests for Endpoints
         Then status 200
         And match responseType == "json"
         And match response == "#object"
-        And match response == { userId: "#number", id: "#number", title: "#string", completed: "#boolean" }
+        And match response == schemas.todoSchema
         And match response contains payload
         * print `Updated todo with id: ${response.id}`
 
@@ -117,7 +117,7 @@ Feature: Functional Tests for Endpoints
         Then status 201
         And match responseType == "json"
         And match response == "#object"
-        And match response == { userId: "#number", id: "#number", title: "#string" }
+        And match response == schemas.albumSchema
         And match response contains payload
         * print `Created album with id: ${response.id}`
 
@@ -136,7 +136,7 @@ Feature: Functional Tests for Endpoints
         Then status 200
         And match responseType == "json"
         And match response == "#object"
-        And match response == { userId: "#number", id: "#number", title: "#string" }
+        And match response == schemas.albumSchema
         And match response contains payload
         * print `Updated album with id: ${response.id}`
 
@@ -166,7 +166,7 @@ Feature: Functional Tests for Endpoints
         Then status 201
         And match responseType == "json"
         And match response == "#object"
-        And match response == { postId: "#number", id: "#number", name: "#string", email: "#string", body: "#string" }
+        And match response == schemas.commentSchema
         And match response contains payload
         * print `Created comment with id: ${response.id}`
 
@@ -185,7 +185,7 @@ Feature: Functional Tests for Endpoints
         Then status 200
         And match responseType == "json"
         And match response == "#object"
-        And match response == { postId: "#number", id: "#number", name: "#string", email: "#string", body: "#string" }
+        And match response == schemas.commentSchema
         And match response contains payload
         * print `Updated comment with id: ${response.id}`
 
@@ -215,7 +215,7 @@ Feature: Functional Tests for Endpoints
         Then status 201
         And match responseType == "json"
         And match response == "#object"
-        And match response == { albumId: "#number", id: "#number", title: "#string", url: "#string", thumbnailUrl: "#string" }
+        And match response == schemas.photoSchema
         And match response contains payload
         * print `Created photo with id: ${response.id}`
 
@@ -234,7 +234,7 @@ Feature: Functional Tests for Endpoints
         Then status 200
         And match responseType == "json"
         And match response == "#object"
-        And match response == { albumId: "#number", id: "#number", title: "#string", url: "#string", thumbnailUrl: "#string" }
+        And match response == schemas.photoSchema
         And match response contains payload
         * print `Updated photo with id: ${response.id}`
 
@@ -264,7 +264,7 @@ Feature: Functional Tests for Endpoints
         Then status 201
         And match responseType == "json"
         And match response == "#object"
-        And match response contains { id: "#number", name: "#string", username: "#string", email: "#string", phone : "#string", website: "#string", address: "#object", company: "#object" }
+        And match response == schemas.userSchema
         And match response contains payload
         * print `Created user with id: ${response.id}`
 
@@ -283,7 +283,7 @@ Feature: Functional Tests for Endpoints
         Then status 200
         And match responseType == "json"
         And match response == "#object"
-        And match response contains { id: "#number", name: "#string", username: "#string", email: "#string", phone : "#string", website: "#string", address: "#object", company: "#object" }
+        And match response == schemas.userSchema
         And match response contains payload
         * print `Updated user with id: ${response.id}`
 

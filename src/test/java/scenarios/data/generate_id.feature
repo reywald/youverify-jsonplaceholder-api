@@ -4,7 +4,7 @@ Feature: Generate Resource ID
     Generate test data for posts, todos, albums, comments, photos and users
 
     Background:
-        * url 'https://jsonplaceholder.typicode.com'
+        * url baseUrl
         * def resourceSizes = { posts: 100, comments: 500, albums: 100, photos: 5000, todos: 200, users: 10 }
 
     Scenario: Generate ID
